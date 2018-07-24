@@ -9,7 +9,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
-import android.support.constraint.solver.widgets.Helper;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +20,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.ricardogwill.mapchoiceweatherapp.Common.Common;
+import com.ricardogwill.mapchoiceweatherapp.Helper.HelperTest;
 import com.ricardogwill.mapchoiceweatherapp.Model.OpenWeatherMap;
 import com.squareup.picasso.Picasso;
 
@@ -49,13 +49,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         setContentView(R.layout.activity_main);
 
         // Control
-        txtCity = (TextView) findViewById(R.id.txtCity);
-        txtLastUpdate = (TextView) findViewById(R.id.txtLastUpdate);
-        txtDescription = (TextView) findViewById(R.id.txtDescription);
-        txtHumidity = (TextView) findViewById(R.id.txtHumidity);
-        txtTime = (TextView) findViewById(R.id.txtTime);
-        txtCelsius = (TextView) findViewById(R.id.txtCelsius);
-        imageView = (ImageView) findViewById(R.id.imageView);
+        txtCity = findViewById(R.id.txtCity);
+        txtLastUpdate = findViewById(R.id.txtLastUpdate);
+        txtDescription = findViewById(R.id.txtDescription);
+        txtHumidity = findViewById(R.id.txtHumidity);
+        txtTime = findViewById(R.id.txtTime);
+        txtCelsius = findViewById(R.id.txtCelsius);
+        imageView = findViewById(R.id.imageView);
 
         // Get coordinates
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             String stream = null;
             String urlString = params[0];
 
-            Helper http = new Helper();
+            HelperTest http = new HelperTest();
             stream = http.getHTTPData(urlString);
             return stream;
         }
@@ -182,9 +182,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             txtHumidity.setText(String.format("%d%%",openWeatherMap.getMain().getHumidity()));
             txtTime.setText(String.format("%s/%s", Common.unixTimeStampToDateTime(openWeatherMap.getSys().getSunrise()),Common.unixTimeStampToDateTime(openWeatherMap.getSys().getSunset())));
             txtCelsius.setText(String.format("%.2f °C",openWeatherMap.getMain().getTemp()));
-            Picasso.with(MainActivity.this);
-                    .load(Common.getImage(openWeatherMap.getWeather().get(0).getIcon()));
-                    .into(imageView);
+            Picasso.get().load(Common.getImage(openWeatherMap.getWeather().get(0).getIcon())).into(imageView);
 
 
         }

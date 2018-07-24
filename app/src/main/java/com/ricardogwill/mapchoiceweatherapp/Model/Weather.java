@@ -5,13 +5,13 @@ public class Weather {
     private int id;
     private String main;
     private String description;
-    private String loon;
+    private String icon;
 
-    public Weather(int id, String main, String description, String loon) {
+    public Weather(int id, String main, String description, String icon) {
         this.id = id;
         this.main = main;
         this.description = description;
-        this.loon = loon;
+        this.icon = icon;
     }
 
     public int getId() {
@@ -38,11 +38,11 @@ public class Weather {
         this.description = description;
     }
 
-    public String getLoon() {
-        return loon;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setLoon(String loon) {
-        this.loon = loon;
+    public void setIcon(String loon) {
+        this.icon = loon;
     }
 }

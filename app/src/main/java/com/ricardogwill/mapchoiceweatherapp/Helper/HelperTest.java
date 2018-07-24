@@ -8,10 +8,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.Buffer;
 
-public class Helper {
+public class HelperTest {
     static String stream = null;
 
-    public Helper() {
+    public HelperTest() {
     }
 
     public String getHTTPData(String urlString){
